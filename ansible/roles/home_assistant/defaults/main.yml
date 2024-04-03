@@ -1,0 +1,7 @@
+---
+homeassistant_version: 2024.3.3
+homeassistant_user: homeassistant
+homeassistant_basedir: /srv/homeassistant
+homeassistant_venv: "{{ homeassistant_basedir }}/venv"
+homeassistant_systemd_unit_filename: home-assistant@{{ homeassistant_user }}.service
+homeassistant_config_repo: http://github.com/queeriouslabs/home_assistant_config.git

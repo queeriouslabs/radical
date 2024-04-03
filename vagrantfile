@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "generic/debian12"
+    config.vm.network "private_network", ip: "192.168.56.105"  # ansible_host
+    config.vm.define "radical"
+
+    config.trigger.after :destroy do |trigger|
+      trigger.run = {inline: "./remove-key.sh"}
+    end
+end
