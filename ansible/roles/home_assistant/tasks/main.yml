@@ -23,8 +23,9 @@
       - tzdata 
       - ffmpeg 
       - liblapack3 
-      - liblapack-dev 
+      - liblapack-dev
       - libatlas-base-dev
+      - git
 
 - name: Create Home Assistant group
   become: true
@@ -162,4 +163,5 @@
   systemd:
     name: "{{ homeassistant_systemd_unit_filename }}"
     state: restarted
+    enabled: yes
     daemon_reload: yes
