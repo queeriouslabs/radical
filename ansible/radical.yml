@@ -26,3 +26,16 @@
   hosts: radical
   roles:
     - home_assistant
+
+- name: Additional packages
+  become: yes
+  become_method: sudo
+  tags: [ 'radical::additional_packages' ]
+  hosts: radical
+  tasks:
+    - name: Install Additional Packages
+      apt:
+        name: "{{ deps }}"
+      vars:
+        deps:
+          - tmux
