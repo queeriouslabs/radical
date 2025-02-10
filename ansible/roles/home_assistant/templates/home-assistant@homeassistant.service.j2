@@ -5,8 +5,8 @@ After=network-online.target
 [Service]
 Type=simple
 User=%i
-WorkingDirectory=/home/%i/.homeassistant
-ExecStart={{ homeassistant_venv }}/bin/hass -c "/home/%i/.homeassistant"
+WorkingDirectory={{ homeassistant_homedir }}/.homeassistant
+ExecStart={{ homeassistant_venv }}/bin/hass -c "{{ homeassistant_homedir }}/.homeassistant"
 RestartForceExitStatus=100
 
 [Install]
