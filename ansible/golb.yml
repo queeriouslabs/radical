@@ -1,0 +1,37 @@
+---
+- name: Add people
+  become: yes
+  become_method: sudo
+  tags: [ 'golb::people' ]
+  hosts: golb
+  tasks:
+    - name: Add users
+      user:
+        name: "{{ item }}"
+        groups: sudo
+        state: present
+      with_items:
+        - marcidy
+
+- name: Install Home Assistant
+  become: yes
+  become_method: sudo
+  tags: [ 'golb::homeassistant' ]
+  hosts: golb
+  roles:
+    - home_assistant
+
+- name: Additional packages
+  become: yes
+  become_method: sudo
+  tags: [ 'golb::additional_packages' ]
+  hosts: golb
+  tasks:
+    - name: Install Additional Packages
+      apt:
+        name: "{{ deps }}"
+        update_cache: true
+      vars:
+        deps:
+          - tmux
+          - sqlite3

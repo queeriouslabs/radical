@@ -4,6 +4,7 @@
   become_method: sudo
   apt:
     name: "{{ deps }}"
+    update_cache: true
   vars:
     deps:
       - python3 
@@ -29,7 +30,6 @@
       - liblapack-dev
       - libatlas-base-dev
       - git
-      - sqlite3
 
 - name: Create Home Assistant group
   become: true
