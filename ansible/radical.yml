@@ -24,6 +24,9 @@
   become_method: sudo
   tags: [ 'radical::homeassistant' ]
   hosts: radical
+  vars:
+    homeassistant_config_repo: http://github.com/queeriouslabs/home_assistant_config.git
+    homeassistant_version: 2024.3.2
   roles:
     - home_assistant
 

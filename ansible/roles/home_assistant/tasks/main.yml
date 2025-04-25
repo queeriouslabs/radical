@@ -46,6 +46,7 @@
     state: present
     group: "{{ homeassistant_user }}"
     system: yes
+    home: "{{ homeassistant_homedir }}"
 
 - name: Create directories
   become: true
@@ -61,6 +62,7 @@
     - "{{ homeassistant_basedir }}/systemd"
     - "{{ homeassistant_basedir }}/config_repo"
     - "{{ homeassistant_venv }}"
+    - "{{ homeassistant_homedir }}"
 
 - name: recursive reown homeassistant directory
   become: true
@@ -74,14 +76,14 @@
 
 - name: Check for .homeassistant directory
   stat:
-    path: "/home/{{ homeassistant_user }}/.homeassistant"
+    path: "{{ homeassistant_homedir }}/.homeassistant"
   register: ha_config_dir
 
 - name: Create blank .homeassistant directory if missing
   become: true
   become_method: sudo
   file:
-    path: "/home/{{ homeassistant_user }}/.homeassistant"
+    path: "{{ homeassistant_homedir }}/.homeassistant"
     owner: "{{ homeassistant_user }}"
     group: "{{ homeassistant_user }}"
     state: directory
@@ -135,8 +137,8 @@
   become_method: sudo
   become_user: "{{ homeassistant_user }}"
   file:
-    src: "/home/{{ homeassistant_user }}/.homeassistant"
-    dest: "/home/{{ homeassistant_user }}/homeassistant"
+    src: "{{ homeassistant_homedir }}/.homeassistant"
+    dest: "{{ homeassistant_homedir }}/homeassistant"
     owner: "{{ homeassistant_user }}"
     group: "{{ homeassistant_user }}"
     state: link
