@@ -18,6 +18,8 @@
   become_method: sudo
   tags: [ 'golb::homeassistant' ]
   hosts: golb
+  vars:
+    homeassistant_version: 2024.3
   roles:
     - home_assistant
 
